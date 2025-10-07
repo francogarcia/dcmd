@@ -1,0 +1,5 @@
+#+TITLE: DCMD
+#+AUTHOR: Franco Eusébio Garcia
+#+DATE: [2025-09-18]
+
+<https://dcmd.francogarcia.com/>
