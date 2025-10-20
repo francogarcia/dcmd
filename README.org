@@ -94,10 +94,20 @@ pip install -r requirements.txt
 
 * Uso
 
+*IMPORTANTE*
+
+O /script/ =./dados-abertos-da-camara/preparacao-dados.sh= remove o diretório =./dados-abertos-da-camara/output/=.
+
+Este diretório será criado pelo /script/.
+Entretanto, se você (hipoteticamente) tiver um diretório com este nome em =./dados-abertos-da-camara/=, por favor, tome as devidas precauções.
+
 #+BEGIN_SRC bash :results output
 #!/usr/bin/env bash
 
+set -Eeuo pipefail
+
 pushd "dados-abertos-da-camara"
+# NOTE Novamente, cuidado com o "rm -r ./output".
 preparacao-dados.sh
 #+END_SRC
 
