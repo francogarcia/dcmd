@@ -12,6 +12,10 @@ Siga o projeto:
 
 <https://www.instagram.com/francogarciacom/>
 
+No momento, o projeto está em algo como /open beta/.
+A intenção é promover a parte interativa e investigativa do website.
+Ou seja, enxugar o texto e melhorar o /layout/.
+
 * Notas Sobre Uso
 
 Menções para "#dcmd", "Deputado, Cadê Meu Dinheiro??!!", "<https://dcmd.francogarcia.com/>", e Desblindagem Digital e Auditável seriam apreciadas.
