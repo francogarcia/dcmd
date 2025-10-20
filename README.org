@@ -17,6 +17,7 @@ Siga o projeto:
 Menções para "#dcmd", "Deputado, Cadê Meu Dinheiro??!!", "<https://dcmd.francogarcia.com/>", e Desblindagem Digital e Auditável seriam apreciadas.
 O sucesso deste projeto depende de você e de divulgação.
 
+O autor precisa decidir sobre uma licença.
 O código, os /scripts/, e os dados e arquivos gerados não podem ser usados para divulgação de mentiras.
 
 Parlamentares e/ou partidos que votaram a favor da PEC das Prerrogativas Parlamentares (Blindagem) não tem permissão para usar o código, nem /scripts/, nem os dados e arquivos gerados como saída.
