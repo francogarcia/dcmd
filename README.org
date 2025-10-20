@@ -1,5 +1,122 @@
-#+TITLE: DCMD
+#+TITLE: #dcmd - Deputado, Cadê Meu Dinheiro??!!
 #+AUTHOR: Franco Eusébio Garcia
 #+DATE: [2025-09-18]
 
+* [[https://dcmd.francogarcia.com/][Deputado, Cadê Meu Dinheiro??!!: Conheça o Custo do Parlamentar Brasileiro e Excerça sua Cidadania]]
+
+Conheça o projeto:
+
 <https://dcmd.francogarcia.com/>
+
+Siga o projeto:
+
+<https://www.instagram.com/francogarciacom/>
+
+* Notas Sobre Uso
+
+Menções para "#dcmd", "Deputado, Cadê Meu Dinheiro??!!", "<https://dcmd.francogarcia.com/>", e Desblindagem Digital e Auditável seriam apreciadas.
+O sucesso deste projeto depende de você e de divulgação.
+
+O código, os /scripts/, e os dados e arquivos gerados não podem ser usados para divulgação de mentiras.
+
+Parlamentares e/ou partidos que votaram a favor da PEC das Prerrogativas Parlamentares (Blindagem) não tem permissão para usar o código, nem /scripts/, nem os dados e arquivos gerados como saída.
+Isso é válido mesmo para partidos que, hipoteticamente, tiveram um único voto a favor.
+
+Parlamentares e/ou partidos que não votaram (abstenção) devem pedir autorização para uso, pois falharam com seus deveres democráticos.
+Novamente, se o partido do parlamentar teve ao menos um voto a favor, nenhum parlamentar do partido tem autorização para uso.
+
+* Dados
+
+- [[https://dadosabertos.camara.leg.br/][Dados Abertos da Câmara dos Deputados]].
+
+O autor agradece à equipe de Dados Abertos pelos dados brutos em formatos computacionalmente processáveis.
+Sem eles, este projeto não seria necessário.
+
+O autor cobra da Câmara dos Deputados pelos dados de remuneração em formato computacionalmente processável que permita mapear valores recebidos por cada parlamentar.
+Se você quiser ajudar o autor (e a equipe de Dados Abertos), consulte em <https://dcmd.francogarcia.com/#sobre-os-dados> como enviar uma mensagem para solicitar a inclusão de remuneração como parte dos Dados Abertos.
+
+* Pré-Requisitos
+
+** Sistema que gerou os dados
+
+#+BEGIN_SRC bash :results output
+date --iso-8601
+echo
+echo "Linux"
+uname -a
+echo
+echo "Python"
+python --version
+pip -V
+echo
+echo "Bash e outros"
+bash --version | head -n 3
+wget --version | head -n 1
+curl --version | head -n 1
+unzip -v | head -n 1
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+2025-10-20
+
+Linux
+Linux darkstar-6700k 6.17.2-arch1-1 #1 SMP PREEMPT_DYNAMIC Sun, 12 Oct 2025 12:45:18 +0000 x86_64 GNU/Linux
+
+Python
+Python 3.13.7
+pip 25.2 from /usr/lib/python3.13/site-packages/pip (python 3.13)
+
+Bash e outros
+GNU bash, version 5.3.3(1)-release (x86_64-pc-linux-gnu)
+Copyright (C) 2025 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+GNU Wget 1.25.0 built on linux-gnu.
+curl 8.16.0 (x86_64-pc-linux-gnu) libcurl/8.16.0 OpenSSL/3.6.0 zlib/1.3.1 brotli/1.1.0 zstd/1.5.7 libidn2/2.3.7 libpsl/0.21.5 libssh2/1.11.1 nghttp2/1.67.1 nghttp3/1.12.0
+UnZip 6.00 of 20 April 2009, by Info-ZIP.  Maintained by C. Spieler.  Send
+#+end_example
+
+** =requirements.txt=
+
+O /script/ =./dados-abertos-da-camara/dados-deputados.sh= utiliza =pip install= para obter cada dependência usada.
+Caso prefira instalar usando um arquivo de requisitos:
+
+#+BEGIN_SRC bash :results output
+python -m venv virtual_environment
+source virtual_environment/bin/activate
+pip install -r requirements.txt
+#+END_SRC
+
+* Uso
+
+#+BEGIN_SRC bash :results output
+#!/usr/bin/env bash
+
+pushd "dados-abertos-da-camara"
+preparacao-dados.sh
+#+END_SRC
+
+** Dados de Entrada
+
+Os dados baixados dos Dados Abertos da Câmara dos Deputados são armazenados em =./dados-abertos-da-camara/input/=.
+
+O /script/ =gastos-deputados.py= processa gastos da cota parlamentar.
+Partes do /script/ poderiam ser paralelizadas para reduzir o tempo de execução.
+
+Como parlamentares que não usaram a cota não constam nos gastos, o /script/ =dados-deputados.py= utiliza a API dos Dados Abertos para obter dados de cada deputado.
+Para evitar sobrecarregar os servidores da Câmara, o /script/ define um intervalo de um segundo entre requisições.
+Como existem mais de 600 registros, isso significa que o /script/ leva um tempo considerável para terminar.
+
+** Dados de Saída
+
+Os dados processados e gerados são armazenados em =./dados-abertos-da-camara/output/=.
+
+Por padrão, o /script/ =./dados-abertos-da-camara/gastos-deputados.py= cria arquivos CSV para análise posterior.
+Caso você queira outro formato, modifique ~gere_dataset()~.
+O procedimento possui alguns formatos pré-definidos, embora talvez seja necessário ajustar os parâmetros da geração conforme suas necessidades.
+
+Após a execução do /script/, o diretório de saída conterá arquivos CSV e PNG gerados para cada deputado com gastos da cota parlamentar.
+Para possíveis futuras atualizações do projeto, um subdiretório com o ano agrupa dados de 2025.
+
+Os arquivos CSV são os mesmos usados pelo website <https://dcmd.francogarcia.com/> para geração das tabelas para cada parlamentar.
+As imagens também são as mesmas apresentadas.
