@@ -23,6 +23,7 @@ mkdir -p ./input/api/
 mkdir -p ./input/datasets/
 mkdir -p ./input/datasets/testes/
 mkdir -p ./input/deputados/2025/
+mkdir -p ./input/deputados/2025-historicos/
 
 mkdir -p ./output/
 mkdir -p ./output/api/votacoes

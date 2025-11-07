@@ -118,12 +118,24 @@ pushd "dados-abertos-da-camara"
 
 Os dados baixados dos Dados Abertos da Câmara dos Deputados são armazenados em =./dados-abertos-da-camara/input/=.
 
+*** Cota Parlamentar
+
 O /script/ =gastos-deputados.py= processa gastos da cota parlamentar.
 Partes do /script/ poderiam ser paralelizadas para reduzir o tempo de execução.
 
 Como parlamentares que não usaram a cota não constam nos gastos, o /script/ =dados-deputados.py= utiliza a API dos Dados Abertos para obter dados de cada deputado.
 Para evitar sobrecarregar os servidores da Câmara, o /script/ define um intervalo de um segundo entre requisições.
 Como existem mais de 600 registros, isso significa que o /script/ leva um tempo considerável para terminar.
+
+*** Salários
+
+Como não há dados abertos de salários ([[https://dcmd.francogarcia.com/#sobre-os-dados][solicite no Fale Conosco da Câmara]]), o projeto tenta estimar os salários usando a API de históricos para calcular os dias em que cada deputado esteve na situação "Exercício".
+Isso é feito pelos /scripts/ =historicos-deputados.py= (obtém os arquivos de histórico) e =processamento-historico-deputados.py= (processa os arquivos para estimar os salários).
+
+Na experiência do autor, a API de histórico parece ter uma taxa de /timeouts/ elevada; assim, é possível que seja necessário executar o script várias vezes para obter todos os arquivos necessários.
+
+O arquivo gerado com a estima de salários é salvo em =./input/deputados/historico-deputados-2025.json=.
+Como nem todos os registros da listagem de deputados representam parlamentares em exercício, as estimativas feitas tentam evitar superestimar os custos de remunerações.
 
 ** Dados de Saída
 
